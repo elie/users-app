@@ -6,7 +6,7 @@ function ensureLoggedIn(req, res, next) {
     const decodedToken = jsonwebtoken.verify(token, "SECRET");
     return next();
   } catch (err) {
-    return res.json({
+    return res.status(401).json({
       message: "Unauthorized"
     });
   }
@@ -19,13 +19,13 @@ function ensureCorrectUser(req, res, next) {
     if (decodedToken.user_id === +req.params.id) {
       return next();
     } else {
-      return res.json({
+      return res.status(401).json({
         message: "Unauthorized"
       });
     }
     return next();
   } catch (err) {
-    return res.json({
+    return res.status(401).json({
       message: "Unauthorized"
     });
   }

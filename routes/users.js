@@ -6,7 +6,7 @@ const jsonwebtoken = require("jsonwebtoken");
 const { ensureCorrectUser, ensureLoggedIn } = require("../middleware/auth");
 
 // GET /users
-router.get("", async (req, res, next) => {
+router.get("", ensureLoggedIn, async (req, res, next) => {
   try {
     const userData = await db.query("SELECT * FROM users");
     return res.json(userData.rows);
@@ -83,12 +83,8 @@ router.get("/protected", ensureLoggedIn, (req, res, next) => {
 // /users/secure/10 ---->
 router.get("/secure/:id", ensureCorrectUser, (req, res, next) => {
   return res.json({
-    message: "Unauthorized"
+    message: "You made it!"
   });
 });
-
-// Make another GET to "/supersecure/:id"
-// do the exact same thing as above!
-// BONUS - refactor to a separate middleware function!
 
 module.exports = router;

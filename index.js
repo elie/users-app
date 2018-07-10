@@ -13,6 +13,4 @@ app.use(bodyParser.json());
 app.use(morgan("dev"));
 app.use("/users", userRoutes);
 
-app.listen(3000, () => {
-  console.log("server starting on port 3000!");
-});
+module.exports = app;
