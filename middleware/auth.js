@@ -1,3 +1,5 @@
+const jsonwebtoken = require("jsonwebtoken");
+
 function ensureLoggedIn(req, res, next) {
   try {
     const token = req.headers.authorization;
